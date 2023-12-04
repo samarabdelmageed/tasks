@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,7 @@ Route::prefix('Blog')->group(function(){
         return 'Medical Blog';
     });
 });
+
+Route::get('/login', [FormController::class, 'show']);
+Route::post('/process-form', [FormController::class, 'processForm'])->name('process.form');
+Route::get('/logged', [FormController::class, 'displayEnteredData'])->name('display.entered.data');
