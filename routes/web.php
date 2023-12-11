@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +53,5 @@ Route::prefix('Blog')->group(function(){
 Route::get('/login', [FormController::class, 'show']);
 Route::post('/process-form', [FormController::class, 'processForm'])->name('process.form');
 Route::get('/logged', [FormController::class, 'displayEnteredData'])->name('display.entered.data');
+Route::get('createpost', [PostController::class, 'create'])->name('createPost');
+Route::post('storepost', [PostController::class, 'store'])->name('storePost');
