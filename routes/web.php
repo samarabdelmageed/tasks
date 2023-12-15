@@ -55,3 +55,7 @@ Route::post('/process-form', [FormController::class, 'processForm'])->name('proc
 Route::get('/logged', [FormController::class, 'displayEnteredData'])->name('display.entered.data');
 Route::get('createpost', [PostController::class, 'create'])->name('createPost');
 Route::post('storepost', [PostController::class, 'store'])->name('storePost');
+Route::get('posts', [PostController::class, 'index'])->name('posts');
+Route::get('updatePost/{id}',[PostController::class, 'edit'])->name('updatePost');
+Route::put('update/{id}',[PostController::class, 'update'])->name('update');
+Route::get('showPost/{id}',[PostController::class, 'show'])->name('show');

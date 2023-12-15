@@ -7,12 +7,14 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+    private $columns = ['postTitle','author','description','published'];
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $posts = Post::get();
+        return view('posts',compact('posts'));
     }
 
     /**
@@ -28,17 +30,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post();
-        $post->postTitle = $request->title;
-        $post->author = $request->author;
-        $post->description = $request->description;
-        if(isset($request->published)){
-            $post->published = 1;
-        }else{
-            $post->published = 0;
-        }
-        $post->save();
-        return 'Data added successfully';
+        // $post = new Post();
+        // $post->postTitle = $request->title;
+        // $post->author = $request->author;
+        // $post->description = $request->description;
+        // if(isset($request->published)){
+        //     $post->published = 1;
+        // }else{
+        //     $post->published = 0;
+        // }
+        // $post->save();
+        $data = $request->only($this->columns);
+        $data['published'] = isset($request->published);
+        Post::create($data);
+        return redirect ('posts');
     }
 
     /**
@@ -46,7 +51,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('showPost',compact('post'));
     }
 
     /**
@@ -54,7 +60,8 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('updatePost',compact('post'));
     }
 
     /**
@@ -62,7 +69,10 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->only($this->columns);
+        $data['published'] = isset($request->published);
+        Post::where('id',$id)->update($data);
+        return redirect ('posts');
     }
 
     /**
