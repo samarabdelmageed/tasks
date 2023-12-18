@@ -12,7 +12,7 @@
 
 @include('includes.nav')
 <div class="container">
-  <h2>Posts List</h2>
+  <h2>Trashed Posts List</h2>
   <table class="table table-hover">
     <thead>
     <tr>
@@ -21,9 +21,8 @@
         <th>Description</th>
         <th>Published</th>
         <th>Created at</th>
-        <th>Show</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>Force Delete</th>
+        <th>Restore</th>
     </tr>
     </thead>
 
@@ -35,9 +34,8 @@
         <td>{{$post->description}}</td>
         <td>{{$post->published ? 'yes':'no'}}</td>
         <td>{{$post->created_at}}</td>
-        <td><a href="showPost/{{ $post->id }}">Show</a></td>
-        <td><a href="updatePost/{{ $post->id }}">Edit</a></td>
-        <td><a href="deletePost/{{ $post->id }}" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+        <td><a href="forceDelete/{{ $post->id }}" onclick="return confirm('Are you sure you want to permanently delete?')">Force Delete</a></td>
+        <td><a href="restorePost/{{ $post->id }}" onclick="return confirm('Are you sure you want to restore?')">Restore</a></td>
       </tr>
     @endforeach
    
